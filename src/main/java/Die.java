@@ -4,52 +4,43 @@ public class Die {
     int sides;
     int value;
     int[] probabilities;
-//constructor to initialise values
-    public Die(int sides) {
-        this.sides = sides;
+
+
+
+    public Die(int sides) { // this is a default constructor for a 6 sided dice
+        this.sides = sides; // here we initialize our dice sides
     }
 
-    public Die(int sides , int[] probabilities) {
-        this.sides = sides;
-        //   this.probabilities = setProbabilities();
+    public Die(int sides , int[] probabilities) { // this is an optional constructor that includes probabilities
+        this.sides = sides; // here we initialize our dice sides
+        this.probabilities = setProbabilities(probabilities); // here we are initialize the probability variable
 
     }
 
-    public static void main(String[] args)
-    {
 
-        Die die6 = new Die(20);
-        Die dieh = new Die(20,new int[]{0,0,0,0,0,0});
-        die6.roll();
-        dieh.roll();
-        System.out.println(die6.value);
-        System.out.println(die6.value);
-    }
-
-    public int roll()
+    public int roll() // This is our roll method that is going to roll the dice for us
     {
         Random random = new Random(); // rolling the die
-        value = random.nextInt(this.sides); // assigning the random number between 0 - side  to value
+        value = 1+random.nextInt(this.sides); // assigning the random number between 1 - side  to value
         return value; // returning the results
     }
 
-    public  int[] setProbabilities(int [] numbers)
+    public  int[] setProbabilities(int [] numbers) // Its our method that have to set our probabilities according to the rules we are given
     {
-        int sum = 0;
+        int sum = 0; // we initialize our sum value
 
-
-        for (int probability : probabilities) {
+        for (int probability : numbers) { // checking for negative numbers
             if (probability < 0) {
                 System.out.println("negative probabilities not allowed");
             }else {
-                sum += probabilities[probability];
+                sum += numbers[probability];
             }
         }
 
         if(sum < 1)
         {
             System.out.println("probability sum must be greater than 0");
-        }else  if(!(probabilities.length == this.sides)){
+        }else  if(!(numbers.length == this.sides)){
             System.out.println("Probabilities length not equal to Dice sides");
         }
 
